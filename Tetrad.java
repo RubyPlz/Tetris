@@ -12,25 +12,66 @@ public class Tetrad
 
     public Tetrad(BoundedGrid<Block> grid)
     {
-        //Exercise 1.2  Insert code here to
-        //                  instantiate blocks Block array (length 4)
-        //                  initialize blocks array with new Block objects
-        //                  declare color variable
-        //                  declare and instantiate locs Location array (length 4)
-        //                  declare shape variable and set equal to zero
-
-        //Exercise 2.0  Insert code here to
-        //                  choose a random integer from 0 to 6
-
-        //Exercise 1.2  Insert code here to
-        //                  branch (if statements) based on each shape number, to then
-        //                      set the color variable for that shape
-        //                      set the block locations for that shape
-        
-        //Exercise 1.2  Insert code here (after the above if statements) to
-        //                  loop through the blocks array to
-        //                      set the color of each block
-        //                  call addToLocations
+        blocks = new Block[4];
+        for(int i = 0; i<4; i++){
+            blocks[i] = new Block();
+        }
+        Color color = Color.BLACK;
+        Location[] locs = new Location[4];
+        int shape = (int)(Math.random()*7);
+        if(shape == 0){
+            locs[0] = new Location(0,3);
+            locs[1] = new Location(0,4);
+            locs[2] = new Location(0,5);
+            locs[3] = new Location(0,6); //line
+            color = Color.BLUE;
+        }
+        if(shape == 1){
+            locs[0] = new Location(1,3);
+            locs[1] = new Location(2,3);
+            locs[2] = new Location(3,3);
+            locs[3] = new Location(3,4); //L-Reverse
+            color = Color.YELLOW;
+        }
+        if(shape == 2){
+           locs[0] = new Location(1,4);
+           locs[1] = new Location(2,4);
+           locs[2] = new Location(3,4);
+           locs[3] = new Location(3,3); //L
+           color = Color.ORANGE;
+        }
+        if(shape == 3){
+            locs[0] = new Location(2,3);
+            locs[1] = new Location(1,3);
+            locs[2] = new Location(1,4);
+            locs[3] = new Location(2,4); //Z-Reverse
+            color = Color.CYAN;
+        }
+        if(shape == 4){
+            locs[0] = new Location(0,3);
+            locs[1] = new Location(1,3);
+            locs[2] = new Location(1,4);
+            locs[3] = new Location(2,4); //Z
+            color = Color.GREEN;
+        }
+        if(shape == 5){
+            locs[0] = new Location(0,3);
+            locs[1] = new Location(1,3);
+            locs[2] = new Location(2,3);
+            locs[3] = new Location(1,4); //T
+            color = Color.MAGENTA;
+        }
+        if(shape == 6){
+            locs[0] = new Location(0,3);
+            locs[1] = new Location(0,4);
+            locs[2] = new Location(1,3);
+            locs[3] = new Location(1,4); //Block
+            color = Color.RED;
+        }
+        for(int i = 0; i < blocks.length; i++){
+            blocks[i].setColor(color);
+        }
+        this.addToLocations(grid, locs);
     }
 
     //precondition:  blocks are not in any grid;
@@ -39,7 +80,9 @@ public class Tetrad
     //               and blocks have been put in the grid.
     private void addToLocations(BoundedGrid<Block> grid, Location[] locs)
     {
-        throw new RuntimeException("Insert Exercise 1.1 code here");    // replace this line
+        for(int i = 0; i<locs.length; i++){
+            blocks[i].putSelfInGrid(grid, locs[i]);
+        }  // replace this line
     }
 
     //precondition:  Blocks are in the grid.
