@@ -34,11 +34,11 @@ public class Tetrad
             color = Color.YELLOW;
         }
         if(shape == 2){
-           locs[0] = new Location(1,4);
-           locs[1] = new Location(2,4);
-           locs[2] = new Location(3,4);
-           locs[3] = new Location(3,3); //L
-           color = Color.ORANGE;
+            locs[0] = new Location(1,4);
+            locs[1] = new Location(2,4);
+            locs[2] = new Location(3,4);
+            locs[3] = new Location(3,3); //L
+            color = Color.ORANGE;
         }
         if(shape == 3){
             locs[0] = new Location(2,3);
@@ -90,16 +90,26 @@ public class Tetrad
     //               blocks have been removed from grid.
     private Location[] removeBlocks()
     {
-        throw new RuntimeException("Insert Exercise 2.1 code here");    // replace this line
+        Location[] locs = new Location[blocks.length];
+        for(int i = 0; i<blocks.length; i++){
+            locs[i] = blocks[i].getLocation();
+            blocks[i].removeSelfFromGrid();
+        }
+        return locs;   // replace this line
     }
 
     //postcondition: Returns true if each of locs is
     //               valid (on the board) AND empty in
     //               grid; false otherwise.
     private boolean areEmpty(BoundedGrid<Block> grid,
-                             Location[] locs)
+    Location[] locs)
     {
-        throw new RuntimeException("Insert Exercise 2.1 code here");    // replace this line
+        for(Location l: locs){
+            if(grid.isValid(l))
+                if(grid.get(l)!=null)
+                    return false;
+        }
+        return true;    // replace this line
     }
 
     //postcondition: Attempts to move this tetrad deltaRow
@@ -116,8 +126,27 @@ public class Tetrad
         //              check if the new locations are empty
         //              replace the tetrad in the proper place (translated)
         //              return true if moved, false if not moved
-
-        throw new RuntimeException("Insert Exercise 2.2 code here");    // replace this line
+        BoundedGrid<Block> g = blocks[0].getGrid();
+        Location[] locs = new Location[blocks.length];
+        for(int i = 0; i < blocks.length; i++){
+            locs[i] = blocks[i].getLocation();
+            if(locs[i]==null)
+                return false;
+        }
+        Location[] newLocs = new Location[blocks.length];
+        for(int i = 0; i<blocks.length; i++){
+            newLocs[i] = new Location(locs[i].getRow() + deltaRow, locs[i].getCol() + deltaCol);
+        }
+        boolean valid = true;
+        for(int i = 0; i<blocks.length; i++){
+            valid = valid && g.isValid(newLocs[i]);
+        }
+        if(!(areEmpty(g,newLocs)&&valid)){
+            this.addToLocations(g, locs);
+            return false;
+        }
+        this.addToLocations(g, newLocs);
+        return true;   // replace this line
     }
 
     //postcondition: Attempts to rotate this tetrad

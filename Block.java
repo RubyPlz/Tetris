@@ -23,35 +23,36 @@ public class Block
     //gets the color of this block
     public Color getColor()
     {
-        throw new RuntimeException("Insert Exercise 0.0 code here");    // replace this line
+        return color;    // replace this line
     }
 
     //sets the color of this block to newColor.
     public void setColor(Color newColor)
     {
-        throw new RuntimeException("Insert Exercise 0.0 code here");    // replace this line
+        color = newColor;    // replace this line
     }
 
     //gets the grid of this block, or null if this block is not contained in a grid
     public BoundedGrid<Block> getGrid()
     {
-        throw new RuntimeException("Insert Exercise 0.0 code here");    // replace this line
+        return grid;    // replace this line
     }
 
     //gets the location of this block, or null if this block is not contained in a grid
     public Location getLocation()
     {
-        throw new RuntimeException("Insert Exercise 0.0 code here");    // replace this line
+        return location;    // replace this line
     }
 
     //removes this block from its grid
     //precondition:  this block is contained in a grid
     public void removeSelfFromGrid()
     {
-        //First, using the grid object, call the remove method (pass it this location)
-        //Second, set this location to null
-        //Third, set this grid to null
-        throw new RuntimeException("Insert Exercise 0.0 code here");    // replace this line
+       if(location!=null){
+            grid.remove(location);    //removes the location from the grid
+            location = null;            //location is gone now, so it's null
+            grid = null;            //grid is gone now, so it's null
+        };    // replace this line
     }
 
     //puts this block into location loc of grid gr
