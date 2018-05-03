@@ -70,12 +70,13 @@ public class Tetris implements ArrowListener
             //if(this.topRowsEmpty()){
                 //break;
             //}
+            
             if(activeTetrad.translate(1,0) == false){
                 activeTetrad = new Tetrad(grid);
                 n = 0;
                 score += 100;
             }
-            try { Thread.sleep(n); } catch(Exception e) {}
+            try { Thread.sleep(n-(level*10)); } catch(Exception e) {}
             //Insert Exercise 3.2 code here
             //Insert Exercise 3.3 code here
             this.clearCompletedRows();

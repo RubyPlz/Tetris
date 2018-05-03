@@ -20,52 +20,52 @@ public class Tetrad
         Location[] locs = new Location[4];
         int shape = (int)(Math.random()*7);
         if(shape == 0){
-            locs[0] = new Location(0,3);
-            locs[1] = new Location(0,4);
-            locs[2] = new Location(0,5);
-            locs[3] = new Location(0,6); //line
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(3,4);
+            locs[2] = new Location(3,5);
+            locs[3] = new Location(3,6); //line
             color = Color.BLUE;
         }
         if(shape == 1){
-            locs[0] = new Location(1,3);
-            locs[1] = new Location(2,3);
-            locs[2] = new Location(3,3);
-            locs[3] = new Location(3,4); //L-Reverse
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(4,3);
+            locs[2] = new Location(5,3);
+            locs[3] = new Location(5,4); //L-Reverse
             color = Color.YELLOW;
         }
         if(shape == 2){
-            locs[0] = new Location(1,4);
-            locs[1] = new Location(2,4);
-            locs[2] = new Location(3,4);
-            locs[3] = new Location(3,3); //L
+            locs[0] = new Location(3,4);
+            locs[1] = new Location(4,4);
+            locs[2] = new Location(5,4);
+            locs[3] = new Location(5,3); //L
             color = Color.ORANGE;
         }
         if(shape == 3){
-            locs[0] = new Location(2,3);
-            locs[1] = new Location(3,3);
-            locs[2] = new Location(3,2);
-            locs[3] = new Location(4,2); //Z-Reverse
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(4,3);
+            locs[2] = new Location(4,2);
+            locs[3] = new Location(5,2); //Z-Reverse
             color = Color.CYAN;
         }
         if(shape == 4){
-            locs[0] = new Location(0,3);
-            locs[1] = new Location(1,3);
-            locs[2] = new Location(1,4);
-            locs[3] = new Location(2,4); //Z 
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(4,3);
+            locs[2] = new Location(4,4);
+            locs[3] = new Location(5,4); //Z 
             color = Color.GREEN;
         }
         if(shape == 5){
-            locs[0] = new Location(0,3);
-            locs[1] = new Location(1,3);
-            locs[2] = new Location(2,3);
-            locs[3] = new Location(1,4); //T
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(4,3);
+            locs[2] = new Location(5,3);
+            locs[3] = new Location(4,4); //T
             color = Color.MAGENTA;
         }
         if(shape == 6){
-            locs[0] = new Location(0,3);
-            locs[1] = new Location(0,4);
-            locs[2] = new Location(1,3);
-            locs[3] = new Location(1,4); //Block
+            locs[0] = new Location(3,3);
+            locs[1] = new Location(3,4);
+            locs[2] = new Location(4,3);
+            locs[3] = new Location(4,4); //Block
             color = Color.RED;
         }
         for(int i = 0; i < blocks.length; i++){
