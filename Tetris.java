@@ -17,6 +17,8 @@ public class Tetris implements ArrowListener
     private BlockDisplay display;
     private Tetrad activeTetrad;
     private int n;
+    private int score;
+    private int level;
     public Tetris()
     {
         grid = new BoundedGrid<Block>(20, 10);
@@ -24,7 +26,8 @@ public class Tetris implements ArrowListener
         display.setTitle("Tetris");
         activeTetrad = new Tetrad(grid);
         display.setArrowListener(this);
-        
+        score = 0;
+        level = 0;
     }
 
     public void upPressed()
@@ -60,6 +63,8 @@ public class Tetris implements ArrowListener
 
     public void play()
     {
+        score = 0;
+        level = 0;
         while (true)
         {
             //if(this.topRowsEmpty()){
@@ -68,6 +73,7 @@ public class Tetris implements ArrowListener
             if(activeTetrad.translate(1,0) == false){
                 activeTetrad = new Tetrad(grid);
                 n = 0;
+                score += 100;
             }
             try { Thread.sleep(n); } catch(Exception e) {}
             //Insert Exercise 3.2 code here
@@ -75,6 +81,7 @@ public class Tetris implements ArrowListener
             this.clearCompletedRows();
             n = 1000;
             display.showBlocks();
+            display.setTitle("Level: " + level + " Score: " + score);
         }
     }
 
@@ -116,6 +123,8 @@ public class Tetris implements ArrowListener
             if(isCompletedRow(i)){
                 clearRow(i);
                 moveDownAbove(i);
+                score += 1000 * level;
+                level += 1;
             }
 
         }    // replace this line

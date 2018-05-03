@@ -42,9 +42,9 @@ public class Tetrad
         }
         if(shape == 3){
             locs[0] = new Location(2,3);
-            locs[1] = new Location(1,3);
-            locs[2] = new Location(1,4);
-            locs[3] = new Location(2,2); //Z-Reverse
+            locs[1] = new Location(3,3);
+            locs[2] = new Location(3,2);
+            locs[3] = new Location(4,2); //Z-Reverse
             color = Color.CYAN;
         }
         if(shape == 4){
