@@ -44,14 +44,14 @@ public class Tetrad
             locs[0] = new Location(2,3);
             locs[1] = new Location(1,3);
             locs[2] = new Location(1,4);
-            locs[3] = new Location(2,4); //Z-Reverse
+            locs[3] = new Location(2,2); //Z-Reverse
             color = Color.CYAN;
         }
         if(shape == 4){
             locs[0] = new Location(0,3);
             locs[1] = new Location(1,3);
             locs[2] = new Location(1,4);
-            locs[3] = new Location(2,4); //Z
+            locs[3] = new Location(2,4); //Z 
             color = Color.GREEN;
         }
         if(shape == 5){
@@ -132,6 +132,7 @@ public class Tetrad
             locs[i] = blocks[i].getLocation();
             if(locs[i]==null)
                 return false;
+            blocks[i].removeSelfFromGrid();
         }
         Location[] newLocs = new Location[blocks.length];
         for(int i = 0; i<blocks.length; i++){
@@ -162,6 +163,25 @@ public class Tetrad
         //              check if the new locations are empty
         //              replace the tetrad in the proper place (rotated)
 
-        throw new RuntimeException("Insert Exercise 3.0 code here");    // replace this line
+        BoundedGrid<Block> g = blocks[0].getGrid();
+        Location[] locs = new Location[blocks.length];
+        for(int i = 0; i < blocks.length; i++){
+            locs[i] = blocks[i].getLocation();
+            blocks[i].removeSelfFromGrid();
+        }
+        Location[] newLocs = new Location[blocks.length];
+        for(int i = 0; i<blocks.length; i++){
+            newLocs[i] = new Location(locs[1].getRow()-locs[1].getCol() + locs[i].getCol(), locs[1].getRow() +locs[1].getCol() - locs[i].getRow());
+        }
+        boolean valid = true;
+        for(int i = 0; i<blocks.length; i++){
+            valid = valid && g.isValid(newLocs[i]);
+        }
+        if(!areEmpty(g,newLocs)||!valid){
+            this.addToLocations(g, locs);
+            return false;
+        }
+        this.addToLocations(g, newLocs);
+        return true;    // replace this line
     }
 }

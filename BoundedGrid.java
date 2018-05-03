@@ -87,4 +87,16 @@ public class BoundedGrid<E>
         }
         return theLocations;
     }
+    public ArrayList<Location> getRow(int row){
+        ArrayList<Location> theLocs = new ArrayList<Location>();
+        for (int c = 0; c < getNumCols(); c++)
+            {
+                //if there is an object in this location put it in the array
+                Location loc = new Location(row,c);
+                if (get(loc) != null)
+                    theLocs.add(loc);
+            }
+        
+        return theLocs;
+    }
 }
