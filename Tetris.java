@@ -65,24 +65,26 @@ public class Tetris implements ArrowListener
     {
         score = 0;
         level = 0;
-        while (true)
+        boolean boop = true;
+        while (boop)
         {
-            //if(this.topRowsEmpty()){
-                //break;
-            //}
-            
+           
+            try { Thread.sleep(n-(level*20)); } catch(Exception e) {}
             if(activeTetrad.translate(1,0) == false){
                 activeTetrad = new Tetrad(grid);
                 n = 0;
                 score += 100;
             }
-            try { Thread.sleep(n-(level*10)); } catch(Exception e) {}
             //Insert Exercise 3.2 code here
             //Insert Exercise 3.3 code here
             this.clearCompletedRows();
             n = 1000;
             display.showBlocks();
             display.setTitle("Level: " + level + " Score: " + score);
+            if(!topRowsEmpty()){
+                boop = false;
+                  
+            }
         }
     }
 
