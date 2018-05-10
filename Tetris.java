@@ -82,11 +82,14 @@ public class Tetris implements ArrowListener
         {
 
             try { Thread.sleep(n-(level*20)); } catch(Exception e) {}
+            this.clearCompletedRows();
             if(activeTetrad.translate(1,0) == false){
 
                 if(!topRowsEmpty()){
                     boop = false;
                     controls = false;
+                    display.setTitle("YOU LOSE");
+                    break;
                 }
                 activeTetrad = new Tetrad(grid);
                 n = 0;
@@ -94,7 +97,7 @@ public class Tetris implements ArrowListener
             }
             //Insert Exercise 3.2 code here
             //Insert Exercise 3.3 code here
-            this.clearCompletedRows();
+            
             n = 1000;
             display.showBlocks();
             display.setTitle("Level: " + level + " Score: " + score);
