@@ -19,6 +19,7 @@ public class Tetris implements ArrowListener
     private int n;
     private int score;
     private int level;
+    private boolean controls;
     public Tetris()
     {
         grid = new BoundedGrid<Block>(20, 10);
@@ -28,37 +29,48 @@ public class Tetris implements ArrowListener
         display.setArrowListener(this);
         score = 0;
         level = 0;
+        controls = true;
     }
 
     public void upPressed()
     {
-        activeTetrad.rotate();
-        display.showBlocks();
+        if(controls){
+            activeTetrad.rotate();
+            display.showBlocks();
+        }
     }
 
     public void downPressed()
     {
-        activeTetrad.translate(1,0);
-        display.showBlocks();
+        if(controls){
+            activeTetrad.translate(1,0);
+            display.showBlocks();
+        }
     }
 
     public void leftPressed()
-    {
-        activeTetrad.translate(0,-1);
-        display.showBlocks();
+    {   
+        if(controls){
+            activeTetrad.translate(0,-1);
+            display.showBlocks();
+        }
     }
 
     public void rightPressed()
     {
-        activeTetrad.translate(0,1);
-        display.showBlocks();
+        if(controls){
+            activeTetrad.translate(0,1);
+            display.showBlocks();
+        }
     }
 
     public void spacePressed()
     {
-        while(activeTetrad.translate(1,0)){}
-        n = 0;
-        display.showBlocks();
+        if(controls){
+            while(activeTetrad.translate(1,0)){}
+            n = 0;
+            display.showBlocks();
+        }
     }
 
     public void play()
@@ -68,9 +80,14 @@ public class Tetris implements ArrowListener
         boolean boop = true;
         while (boop)
         {
-           
+
             try { Thread.sleep(n-(level*20)); } catch(Exception e) {}
             if(activeTetrad.translate(1,0) == false){
+
+                if(!topRowsEmpty()){
+                    boop = false;
+                    controls = false;
+                }
                 activeTetrad = new Tetrad(grid);
                 n = 0;
                 score += 100;
@@ -81,10 +98,7 @@ public class Tetris implements ArrowListener
             n = 1000;
             display.showBlocks();
             display.setTitle("Level: " + level + " Score: " + score);
-            if(!topRowsEmpty()){
-                boop = false;
-                  
-            }
+
         }
     }
 
@@ -132,6 +146,7 @@ public class Tetris implements ArrowListener
 
         }    // replace this line
     }
+
     private void moveDownAbove(int r){
         if(r<1){
             return;
@@ -145,7 +160,6 @@ public class Tetris implements ArrowListener
         }
         moveDownAbove(r-1);
     }
-    
 
     //returns true if top two rows of the grid are empty (no blocks), false otherwise
     private boolean topRowsEmpty()
